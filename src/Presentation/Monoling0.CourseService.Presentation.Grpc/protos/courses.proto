@@ -55,7 +55,6 @@ message UpdateCourseRequest {
 }
 
 message UpdateCourseResponse {
-  models.Course course = 1;
 }
 
 message DeleteCourseRequest {

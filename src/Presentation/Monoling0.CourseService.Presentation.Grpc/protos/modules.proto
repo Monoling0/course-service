@@ -31,7 +31,6 @@ message UpdateModuleRequest {
 }
 
 message UpdateModuleResponse {
-  models.Module module = 1;
 }
 
 message DeleteModuleRequest {

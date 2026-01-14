@@ -6,7 +6,7 @@ public interface ILessonService
 {
     Task<CreateLesson.Response> AddLessonAsync(CreateLesson.Request request, CancellationToken cancellationToken);
 
-    Task<UpdateLesson.Response> UpdateLessonAsync(UpdateLesson.Request request, CancellationToken cancellationToken);
+    Task UpdateLessonAsync(UpdateLesson.Request request, CancellationToken cancellationToken);
 
     Task DeleteLessonAsync(DeleteLesson.Request request, CancellationToken cancellationToken);
 

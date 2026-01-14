@@ -6,7 +6,7 @@ public interface ICourseService
 {
     Task<CreateCourse.Response> CreateAsync(CreateCourse.Request request, CancellationToken cancellationToken);
 
-    Task<UpdateCourse.Response> UpdateAsync(UpdateCourse.Request request, CancellationToken cancellationToken);
+    Task UpdateAsync(UpdateCourse.Request request, CancellationToken cancellationToken);
 
     Task DeleteAsync(DeleteCourse.Request request, CancellationToken cancellationToken);
 
