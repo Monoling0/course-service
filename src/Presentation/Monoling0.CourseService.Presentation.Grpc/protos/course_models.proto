@@ -1,0 +1,87 @@
+syntax = "proto3";
+
+package courses.models;
+
+option csharp_namespace = "Courses.CourseService.Contracts";
+
+enum CefrLevel {
+  CEFR_LEVEL_A1 = 0;
+  CEFR_LEVEL_A2 = 1;
+  CEFR_LEVEL_B1 = 2;
+  CEFR_LEVEL_B2 = 3;
+  CEFR_LEVEL_C1 = 4;
+  CEFR_LEVEL_C2 = 5;
+}
+
+enum CourseState {
+  COURSE_STATE_DRAFT = 0;
+  COURSE_STATE_PUBLISHED = 1;
+  COURSE_STATE_UNPUBLISHED = 2;
+}
+
+enum LessonType {
+  LESSON_TYPE_THEORY = 0;
+  LESSON_TYPE_VIDEO = 1;
+  LESSON_TYPE_AUDIO = 2;
+  LESSON_TYPE_FLASHCARDS = 3;
+}
+
+message Course {
+  int64 id = 1;
+  string name = 2;
+  string description = 3;
+  string language = 4;
+  CefrLevel level = 5;
+  CourseState state = 6;
+}
+
+message Module {
+  int64 id = 1;
+  int64 course_id = 2;
+  int32 number = 3;
+  string name = 4;
+  string description = 5;
+}
+
+message TheoryLessonContent {
+  string theory = 1;
+}
+
+message VideoLessonContent {
+  repeated string video_urls = 1;
+}
+
+message AudioItem {
+  string audio_url = 1;
+  optional string transcription = 2;
+}
+
+message AudioLessonContent {
+  repeated AudioItem audio_item = 1;
+}
+
+message FlashCard {
+  string word = 1;
+  string translation = 2;
+  optional string example_sentence = 3;
+  repeated string synonyms = 4;
+};
+
+message FlashCardLessonContent {
+  repeated FlashCard flash_cards = 1;
+}
+
+message Lesson {
+  int64 id = 1;
+  int64 module_id = 2;
+  string lesson_type = 3;
+  int32 lesson_number = 4;
+  string name = 5;
+  string description = 6;
+  oneof content {
+      TheoryLessonContent theory_lesson_content = 7;
+      VideoLessonContent video_lesson_content = 8;
+      AudioLessonContent audio_lesson_content = 9;
+      FlashCardLessonContent flash_card_lesson_content = 10;
+  }
+}

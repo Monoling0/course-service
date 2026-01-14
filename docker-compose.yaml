@@ -1,0 +1,17 @@
+services:
+  course-service-db:
+    image: postgres:latest
+    container_name: course-service-db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - "7654:5432"
+    restart: unless-stopped
+    networks:
+      - course-service-network
+
+networks:
+  course-service-network:
+    driver: bridge

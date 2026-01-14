@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+package courses;
+
+option csharp_namespace = "Lessons.CourseService.Contracts";
+
+import "course_models.proto";
+
+service LessonService {
+  rpc AddLesson(AddLessonRequest) returns (AddLessonResponse);
+  rpc UpdateLesson(UpdateLessonRequest) returns (UpdateLessonResponse);
+  rpc DeleteLesson(DeleteLessonRequest) returns (DeleteLessonResponse);
+  rpc SwapLessons(SwapLessonsRequest) returns (SwapLessonsResponse);
+  rpc GetLessonList(GetLessonListRequest) returns (GetLessonListResponse);
+}
+
+message AddLessonRequest {
+  int64 module_id = 1;
+  models.LessonType lesson_type = 2;
+  string name = 3;
+  string description = 4;
+  oneof content {
+    models.TheoryLessonContent theory_lesson_content = 5;
+    models.VideoLessonContent video_lesson_content = 6;
+    models.AudioLessonContent audio_lesson_content = 7;
+    models.FlashCardLessonContent flash_card_lesson_content = 8;
+  }
+}
+
+message AddLessonResponse {
+  models.Lesson lesson = 1;
+}
+
+message UpdateLessonRequest {
+  int64 lesson_id = 1;
+  string name = 2;
+  string description = 3;
+  oneof content {
+    models.TheoryLessonContent theory_lesson_content = 4;
+    models.VideoLessonContent video_lesson_content = 5;
+    models.AudioLessonContent audio_lesson_content = 6;
+    models.FlashCardLessonContent flash_card_lesson_content = 7;
+  }
+}
+
+message UpdateLessonResponse {
+  models.Lesson lesson = 1;
+}
+
+message DeleteLessonRequest {
+  int64 lesson_id = 1;
+}
+
+message DeleteLessonResponse {
+}
+
+message SwapLessonsRequest {
+  int64 module_id = 1;
+  int32 first_lesson_number = 2;
+  int32 second_lesson_number = 3;
+}
+
+message SwapLessonsResponse {
+}
+
+message GetLessonListRequest {
+  int64 module_ids = 1;
+  repeated int64 lesson_ids = 2;
+  repeated models.LessonType lesson_types = 3;
+  int64 cursor = 4;
+  int64 page_size = 5;
+}
+
+message GetLessonListResponse {
+  repeated models.Lesson lessons = 1;
+}

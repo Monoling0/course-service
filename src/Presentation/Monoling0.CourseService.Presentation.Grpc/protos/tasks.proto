@@ -1,0 +1,5 @@
+syntax = "proto3";
+
+package courses;
+
+option csharp_namespace = "Tasks.CourseService.Contracts";
