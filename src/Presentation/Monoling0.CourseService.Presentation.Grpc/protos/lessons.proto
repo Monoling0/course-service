@@ -10,8 +10,9 @@ service LessonService {
   rpc AddLesson(AddLessonRequest) returns (AddLessonResponse);
   rpc UpdateLesson(UpdateLessonRequest) returns (UpdateLessonResponse);
   rpc DeleteLesson(DeleteLessonRequest) returns (DeleteLessonResponse);
-  rpc SwapLessons(SwapLessonsRequest) returns (SwapLessonsResponse);
+//  rpc SwapLessons(SwapLessonsRequest) returns (SwapLessonsResponse);
   rpc GetLessonList(GetLessonListRequest) returns (GetLessonListResponse);
+  rpc GetLessonExperience(GetLessonExperienceRequest) returns (GetLessonExperienceResponse);
 }
 
 message AddLessonRequest {
@@ -53,14 +54,14 @@ message DeleteLessonRequest {
 message DeleteLessonResponse {
 }
 
-message SwapLessonsRequest {
-  int64 module_id = 1;
-  int32 first_lesson_number = 2;
-  int32 second_lesson_number = 3;
-}
-
-message SwapLessonsResponse {
-}
+//message SwapLessonsRequest {
+//  int64 module_id = 1;
+//  int32 first_lesson_number = 2;
+//  int32 second_lesson_number = 3;
+//}
+//
+//message SwapLessonsResponse {
+//}
 
 message GetLessonListRequest {
   int64 module_ids = 1;
@@ -72,4 +73,12 @@ message GetLessonListRequest {
 
 message GetLessonListResponse {
   repeated models.Lesson lessons = 1;
+}
+
+message GetLessonExperienceRequest {
+  int64 lesson_id = 1;
+}
+
+message GetLessonExperienceResponse {
+  int32 experience = 1;
 }

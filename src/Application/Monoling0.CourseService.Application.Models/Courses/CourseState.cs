@@ -4,5 +4,5 @@ public enum CourseState
 {
     Draft,
     Published,
-    Unpublish,
+    Unpublished,
 }

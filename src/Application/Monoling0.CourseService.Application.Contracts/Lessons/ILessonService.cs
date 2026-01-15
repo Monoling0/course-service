@@ -6,11 +6,12 @@ public interface ILessonService
 {
     Task<CreateLesson.Response> AddLessonAsync(CreateLesson.Request request, CancellationToken cancellationToken);
 
-    Task UpdateLessonAsync(UpdateLesson.Request request, CancellationToken cancellationToken);
+    Task<UpdateLesson.Response> UpdateLessonAsync(UpdateLesson.Request request, CancellationToken cancellationToken);
 
     Task DeleteLessonAsync(DeleteLesson.Request request, CancellationToken cancellationToken);
 
-    Task SwapLessons(SwapLessons.Request request, CancellationToken cancellationToken);
+    // Task SwapLessons(SwapLessons.Request request, CancellationToken cancellationToken);
+    Task<GetLesson.Response> GetLessonListAsync(GetLesson.Request request, CancellationToken cancellationToken);
 
-    Task<GetLesson.Response> GetLessonAsync(GetLesson.Request request, CancellationToken cancellationToken);
+    Task<GetLessonExperience.Response> GetLessonExperienceAsync(GetLessonExperience.Request request, CancellationToken cancellationToken);
 }

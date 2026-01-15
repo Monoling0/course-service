@@ -13,5 +13,5 @@ public static class GetCourses
         long Cursor,
         long PageSize);
 
-    public readonly record struct Response(IAsyncEnumerable<CourseDto> Courses);
+    public readonly record struct Response(IList<CourseDto> Courses);
 }

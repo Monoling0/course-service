@@ -53,6 +53,7 @@ public class Initial : IMigration
             create table lesson_types
             (
                 lesson_type_id bigint primary key generated always as identity,
+                lesson_type_name text not null,
                 lesson_type_description text not null,
                 lesson_type_experience int not null
             );

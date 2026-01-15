@@ -28,7 +28,7 @@ message CheckAuthorshipResponse {
 
 message AddCourseCreatorRequest {
   int64 course_id = 1;
-  int64 new_course_creator_id = 2;
+  int64 user_id = 2;
   int64 requested_by_user_id = 3;
 }
 

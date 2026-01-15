@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Monoling0.CourseService.Application.Models\Monoling0.CourseService.Application.Models.csproj" />
+    </ItemGroup>
+
 </Project>

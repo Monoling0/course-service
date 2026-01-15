@@ -1,3 +1,9 @@
 namespace Monoling0.CourseService.Application.Models.Lessons;
 
-public record LessonType(string Name, string Description, int Experience, long Id = 0);
+public enum LessonType
+{
+    Theory,
+    Video,
+    Audio,
+    FlashCards,
+}
