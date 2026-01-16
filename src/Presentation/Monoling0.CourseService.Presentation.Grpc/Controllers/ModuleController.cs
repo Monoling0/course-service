@@ -20,11 +20,6 @@ public class ModuleController : ModuleService.ModuleServiceBase
         return base.DeleteModule(request, context);
     }
 
-    public override Task<SwapModulesResponse> SwapModules(SwapModulesRequest request, ServerCallContext context)
-    {
-        return base.SwapModules(request, context);
-    }
-
     public override Task<GetModuleListResponse> GetModuleList(GetModuleListRequest request, ServerCallContext context)
     {
         return base.GetModuleList(request, context);

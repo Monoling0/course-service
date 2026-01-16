@@ -20,11 +20,6 @@ public class LessonController : LessonService.LessonServiceBase
         return base.DeleteLesson(request, context);
     }
 
-    public override Task<SwapLessonsResponse> SwapLessons(SwapLessonsRequest request, ServerCallContext context)
-    {
-        return base.SwapLessons(request, context);
-    }
-
     public override Task<GetLessonListResponse> GetLessonList(GetLessonListRequest request, ServerCallContext context)
     {
         return base.GetLessonList(request, context);
