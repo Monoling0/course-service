@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FluentMigrator" />
+      <PackageReference Include="FluentMigrator.Runner" />
+      <PackageReference Include="Npgsql" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Application\Monoling0.CourseService.Application.Abstractions\Monoling0.CourseService.Application.Abstractions.csproj" />
+      <ProjectReference Include="..\..\Presentation\Monoling0.CourseService.Presentation.Grpc\Monoling0.CourseService.Presentation.Grpc.csproj" />
+    </ItemGroup>
+
+</Project>

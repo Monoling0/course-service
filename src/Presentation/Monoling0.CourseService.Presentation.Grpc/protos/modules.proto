@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package courses;
+
+option csharp_namespace = "Modules.CourseService.Contracts";
+
+import "course_models.proto";
+
+service ModuleService {
+  rpc AddModule(AddModuleRequest) returns (AddModuleResponse);
+  rpc UpdateModule(UpdateModuleRequest) returns (UpdateModuleResponse);
+//  rpc DeleteModule(DeleteModuleRequest) returns (DeleteModuleResponse);
+//  rpc SwapModules(SwapModulesRequest) returns (SwapModulesResponse);
+  rpc GetModuleList(GetModuleListRequest) returns (GetModuleListResponse);
+}
+
+message AddModuleRequest {
+  int64 course_id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message AddModuleResponse {
+  models.Module module = 1;
+}
+
+message UpdateModuleRequest {
+  int64 module_id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message UpdateModuleResponse {
+}
+
+//message DeleteModuleRequest {
+//  int64 module_id = 1;
+//}
+//
+//message DeleteModuleResponse {
+//}
+
+//message SwapModulesRequest {
+//  int64 course_id = 1;
+//  int32 first_module_number = 2;
+//  int32 second_module_number = 3;
+//}
+//
+//message SwapModulesResponse {
+//}
+
+message GetModuleListRequest {
+  int64 course_ids = 1;
+  repeated int64 module_ids = 2;
+  int64 cursor = 3;
+  int64 page_size = 4;
+}
+
+message GetModuleListResponse {
+  repeated models.Module modules = 1;
+}

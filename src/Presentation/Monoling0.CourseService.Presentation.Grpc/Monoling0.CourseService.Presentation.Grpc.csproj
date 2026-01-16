@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Google.Protobuf.Tools" />
+      <PackageReference Include="Grpc.AspNetCore" />
+      <PackageReference Include="Grpc.Tools">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Protobuf ProtoRoot="protos" Include="protos\**\*.proto"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Application\Monoling0.CourseService.Application.Contracts\Monoling0.CourseService.Application.Contracts.csproj" />
+      <ProjectReference Include="..\..\Application\Monoling0.CourseService.Application.Models\Monoling0.CourseService.Application.Models.csproj" />
+    </ItemGroup>
+
+</Project>

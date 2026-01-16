@@ -1,0 +1,90 @@
+syntax = "proto3";
+
+package courses;
+
+option csharp_namespace = "Courses.CourseService.Contracts";
+
+import "course_models.proto";
+
+service CourseService {
+  rpc CheckAuthorship(CheckAuthorshipRequest) returns (CheckAuthorshipResponse);
+  rpc AddCourseCreator(AddCourseCreatorRequest) returns (AddCourseCreatorResponse);
+  rpc CreateCourse(CreateCourseRequest) returns (CreateCourseResponse);
+  rpc UpdateCourse(UpdateCourseRequest) returns (UpdateCourseResponse);
+  rpc PublishCourse(PublishCourseRequest) returns (PublishCourseResponse);
+  rpc UnpublishCourse(UnpublishCourseRequest) returns (UnpublishCourseResponse);
+  rpc GetCourseList(GetCourseListRequest) returns (GetCourseListResponse);
+}
+
+message CheckAuthorshipRequest {
+  int64 course_id = 1;
+  int64 user_id = 2;
+}
+
+message CheckAuthorshipResponse {
+  bool checkResult = 1;
+}
+
+message AddCourseCreatorRequest {
+  int64 course_id = 1;
+  int64 user_id = 2;
+  int64 requested_by_user_id = 3;
+}
+
+message AddCourseCreatorResponse {
+}
+
+message CreateCourseRequest {
+  int64 user_id = 1;
+  string name = 2;
+  string description = 3;
+  string language = 4;
+  models.CefrLevel level = 5;
+}
+
+message CreateCourseResponse {
+    models.Course course = 1;
+}
+
+message UpdateCourseRequest {
+  int64 course_id = 1;
+  optional string name = 2;
+  optional string description = 3;
+  optional models.CefrLevel level = 4;
+}
+
+message UpdateCourseResponse {
+}
+
+message PublishCourseRequest {
+  int64 course_id = 1;
+  int64 published_by_user_id = 2;
+}
+
+message PublishCourseResponse {
+}
+
+message UnpublishCourseRequest {
+  int64 course_id = 1;
+  optional string reason = 2;
+  int64 unpublished_by_user_id = 3;
+}
+
+message UnpublishCourseResponse {
+  int64 course_id = 1;
+  optional string reason = 2;
+  int64 unpublished_by_user_id = 3;
+}
+
+message GetCourseListRequest {
+  repeated int64 course_ids = 1;
+  optional string language = 2;
+  optional models.CefrLevel level = 3;
+  optional models.CourseState state = 4;
+  int64 cursor = 5;
+  int64 page_size = 6;
+}
+
+message GetCourseListResponse {
+  repeated models.Course courses = 1;
+}
