@@ -9,7 +9,7 @@ import "course_models.proto";
 service ModuleService {
   rpc AddModule(AddModuleRequest) returns (AddModuleResponse);
   rpc UpdateModule(UpdateModuleRequest) returns (UpdateModuleResponse);
-  rpc DeleteModule(DeleteModuleRequest) returns (DeleteModuleResponse);
+//  rpc DeleteModule(DeleteModuleRequest) returns (DeleteModuleResponse);
 //  rpc SwapModules(SwapModulesRequest) returns (SwapModulesResponse);
   rpc GetModuleList(GetModuleListRequest) returns (GetModuleListResponse);
 }
@@ -33,12 +33,12 @@ message UpdateModuleRequest {
 message UpdateModuleResponse {
 }
 
-message DeleteModuleRequest {
-  int64 module_id = 1;
-}
-
-message DeleteModuleResponse {
-}
+//message DeleteModuleRequest {
+//  int64 module_id = 1;
+//}
+//
+//message DeleteModuleResponse {
+//}
 
 //message SwapModulesRequest {
 //  int64 course_id = 1;

@@ -30,12 +30,11 @@ public class LessonService : ILessonService
             return new CreateLesson.Response.ModuleNotFound();
         }
 
-        long lessonTypeId = await _persistenceContext.LessonTypes.GetIdAsync(request.Type.ToString(), cancellationToken);
-        var lesson = new Lesson(request.ModuleId, lessonTypeId, request.Name, request.Description, request.Content);
+        var lesson = new Lesson(request.ModuleId, (long)request.Kind, request.Name, request.Description, request.Content);
         Lesson createdLesson = await _persistenceContext.Lessons.CreateAsync(lesson, cancellationToken);
         transaction.Complete();
 
-        return new CreateLesson.Response.Success(createdLesson.MapToDto(request.Type.ToString()));
+        return new CreateLesson.Response.Success(createdLesson.MapToDto(request.Kind.ToString()));
     }
 
     public async Task<UpdateLesson.Response> UpdateLessonAsync(UpdateLesson.Request request, CancellationToken cancellationToken)
@@ -71,7 +70,7 @@ public class LessonService : ILessonService
         await _persistenceContext.Lessons.DeleteAsync(request.LessonId, cancellationToken);
     }
 
-    public async Task<GetLesson.Response> GetLessonListAsync(GetLesson.Request request, CancellationToken cancellationToken)
+    public async Task<GetLessons.Response> GetLessonListAsync(GetLessons.Request request, CancellationToken cancellationToken)
     {
         using var transaction = new TransactionScope(
             TransactionScopeOption.Required,
@@ -82,7 +81,9 @@ public class LessonService : ILessonService
         long[] lessonTypes = new long[size];
         for (int i = 0; i < size; i++)
         {
-            lessonTypes[i] = await _persistenceContext.LessonTypes.GetIdAsync(request.Types[i].ToString(), cancellationToken);
+            LessonType lessonType =
+                await _persistenceContext.LessonTypes.GetAsync((long)request.Types[i], cancellationToken);
+            lessonTypes[i] = lessonType.Id;
         }
 
         var lessonQuery = new LessonQuery(
@@ -97,13 +98,13 @@ public class LessonService : ILessonService
         var response = new List<LessonDto>();
         foreach (Lesson lesson in lessons)
         {
-            string typeName = await _persistenceContext.LessonTypes.GetNameAsync(lesson.LessonTypeId, cancellationToken);
-            response.Add(lesson.MapToDto(typeName));
+            LessonType lessonType = await _persistenceContext.LessonTypes.GetAsync(lesson.LessonTypeId, cancellationToken);
+            response.Add(lesson.MapToDto(lessonType.Name));
         }
 
         transaction.Complete();
 
-        return new GetLesson.Response.Success(response);
+        return new GetLessons.Response.Success(response);
     }
 
     public async Task<GetLessonExperience.Response> GetLessonExperienceAsync(GetLessonExperience.Request request, CancellationToken cancellationToken)
@@ -119,7 +120,9 @@ public class LessonService : ILessonService
             return new GetLessonExperience.Response.LessonNotFound();
         }
 
-        int experience = await _persistenceContext.LessonTypes.GetExperienceAsync(lesson.LessonTypeId, cancellationToken);
+        LessonType lessonType = await _persistenceContext.LessonTypes.GetAsync(lesson.LessonTypeId, cancellationToken);
+        int experience = lessonType.Experience;
+
         transaction.Complete();
 
         return new GetLessonExperience.Response.Success(experience);

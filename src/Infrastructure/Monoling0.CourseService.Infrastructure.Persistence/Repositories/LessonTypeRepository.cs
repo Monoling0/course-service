@@ -1,4 +1,5 @@
 using Monoling0.CourseService.Application.Abstractions.Persistence.Repositories;
+using Monoling0.CourseService.Application.Models.Lessons;
 using Npgsql;
 
 namespace Monoling0.CourseService.Infrastructure.Persistence.Repositories;
@@ -12,10 +13,10 @@ public class LessonTypeRepository : ILessonTypeRepository
         _dataSource = dataSource;
     }
 
-    public async Task<int> GetExperienceAsync(long lessonTypeId, CancellationToken cancellationToken)
+    public async Task<LessonType> GetAsync(long lessonTypeId, CancellationToken cancellationToken)
     {
         const string sql = """
-        select lesson_type_experience
+        select lesson_type_id, lesson_type_name, lesson_type_description, lesson_type_experience
         from lesson_types
         where
           (lesson_type_id = :id)
@@ -34,65 +35,13 @@ public class LessonTypeRepository : ILessonTypeRepository
         await using NpgsqlDataReader reader = await command.ExecuteReaderAsync(cancellationToken);
         if (!await reader.ReadAsync(cancellationToken))
         {
-            throw new Exception($"There is no experience for this lesson type: {lessonTypeId}");
+            throw new Exception($"Lesson type with id {lessonTypeId} does not exist.");
         }
 
-        return reader.GetInt32(0);
-    }
-
-    public async Task<long> GetIdAsync(string lessonTypeName, CancellationToken cancellationToken)
-    {
-        const string sql = """
-                           select lesson_type_id
-                           from lesson_type_name = :name
-                           where
-                             (lesson_type_name = :name)
-                           """;
-
-        await using NpgsqlConnection connection = await _dataSource.OpenConnectionAsync(cancellationToken);
-
-        await using var command = new NpgsqlCommand(sql, connection)
-        {
-            Parameters =
-            {
-                new NpgsqlParameter("name", lessonTypeName),
-            },
-        };
-
-        await using NpgsqlDataReader reader = await command.ExecuteReaderAsync(cancellationToken);
-        if (!await reader.ReadAsync(cancellationToken))
-        {
-            throw new Exception($"There is no lesson type with such name: {lessonTypeName}");
-        }
-
-        return reader.GetInt64(0);
-    }
-
-    public async Task<string> GetNameAsync(long id, CancellationToken cancellationToken)
-    {
-        const string sql = """
-                           select lesson_type_name
-                           from lesson_type_name = :name
-                           where
-                             (lesson_type_id = :id)
-                           """;
-
-        await using NpgsqlConnection connection = await _dataSource.OpenConnectionAsync(cancellationToken);
-
-        await using var command = new NpgsqlCommand(sql, connection)
-        {
-            Parameters =
-            {
-                new NpgsqlParameter("id", id),
-            },
-        };
-
-        await using NpgsqlDataReader reader = await command.ExecuteReaderAsync(cancellationToken);
-        if (!await reader.ReadAsync(cancellationToken))
-        {
-            throw new Exception($"There is no lesson type with such id: {id}");
-        }
-
-        return reader.GetString(0);
+        return new LessonType(
+            Id: reader.GetInt64(0),
+            Name: reader.GetString(1),
+            Description: reader.GetString(2),
+            Experience: reader.GetInt32(3));
     }
 }

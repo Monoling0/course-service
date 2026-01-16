@@ -11,14 +11,13 @@ service CourseService {
   rpc AddCourseCreator(AddCourseCreatorRequest) returns (AddCourseCreatorResponse);
   rpc CreateCourse(CreateCourseRequest) returns (CreateCourseResponse);
   rpc UpdateCourse(UpdateCourseRequest) returns (UpdateCourseResponse);
-  rpc DeleteCourse(DeleteCourseRequest) returns (DeleteCourseResponse);
   rpc PublishCourse(PublishCourseRequest) returns (PublishCourseResponse);
   rpc UnpublishCourse(UnpublishCourseRequest) returns (UnpublishCourseResponse);
   rpc GetCourseList(GetCourseListRequest) returns (GetCourseListResponse);
 }
 
 message CheckAuthorshipRequest {
-  int64 order_id = 1;
+  int64 course_id = 1;
   int64 user_id = 2;
 }
 
@@ -57,13 +56,6 @@ message UpdateCourseRequest {
 message UpdateCourseResponse {
 }
 
-message DeleteCourseRequest {
-  int64 course_id = 1;
-}
-
-message DeleteCourseResponse {
-}
-
 message PublishCourseRequest {
   int64 course_id = 1;
   int64 published_by_user_id = 2;
@@ -74,7 +66,8 @@ message PublishCourseResponse {
 
 message UnpublishCourseRequest {
   int64 course_id = 1;
-  int64 published_by_user_id = 2;
+  optional string reason = 2;
+  int64 unpublished_by_user_id = 3;
 }
 
 message UnpublishCourseResponse {

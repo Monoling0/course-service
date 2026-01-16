@@ -9,7 +9,7 @@ import "course_models.proto";
 service LessonService {
   rpc AddLesson(AddLessonRequest) returns (AddLessonResponse);
   rpc UpdateLesson(UpdateLessonRequest) returns (UpdateLessonResponse);
-  rpc DeleteLesson(DeleteLessonRequest) returns (DeleteLessonResponse);
+//  rpc DeleteLesson(DeleteLessonRequest) returns (DeleteLessonResponse);
 //  rpc SwapLessons(SwapLessonsRequest) returns (SwapLessonsResponse);
   rpc GetLessonList(GetLessonListRequest) returns (GetLessonListResponse);
   rpc GetLessonExperience(GetLessonExperienceRequest) returns (GetLessonExperienceResponse);
@@ -47,12 +47,12 @@ message UpdateLessonRequest {
 message UpdateLessonResponse {
 }
 
-message DeleteLessonRequest {
-  int64 lesson_id = 1;
-}
-
-message DeleteLessonResponse {
-}
+//message DeleteLessonRequest {
+//  int64 lesson_id = 1;
+//}
+//
+//message DeleteLessonResponse {
+//}
 
 //message SwapLessonsRequest {
 //  int64 module_id = 1;

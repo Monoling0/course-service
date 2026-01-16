@@ -10,7 +10,7 @@ public static class PublishCourse
 
         public sealed record Success : Result;
 
-        public sealed record CourseNotFound : Result;
+        public sealed record CourseNotFound() : Result;
 
         public sealed record AlreadyPublished : Result;
     }

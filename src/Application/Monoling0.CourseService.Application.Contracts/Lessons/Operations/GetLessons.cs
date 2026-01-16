@@ -3,9 +3,9 @@ using Monoling0.CourseService.Application.Models.Lessons;
 
 namespace Monoling0.CourseService.Application.Contracts.Lessons.Operations;
 
-public static class GetLesson
+public static class GetLessons
 {
-    public readonly record struct Request(long ModuleId, long[] LessonIds, LessonType[] Types, long Cursor, long PageSize);
+    public readonly record struct Request(long ModuleId, long[] LessonIds, LessonKind[] Types, long Cursor, long PageSize);
 
     public abstract record Response
     {

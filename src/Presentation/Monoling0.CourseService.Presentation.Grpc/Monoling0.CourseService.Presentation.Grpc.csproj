@@ -19,4 +19,9 @@
         <Protobuf ProtoRoot="protos" Include="protos\**\*.proto"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\Application\Monoling0.CourseService.Application.Contracts\Monoling0.CourseService.Application.Contracts.csproj" />
+      <ProjectReference Include="..\..\Application\Monoling0.CourseService.Application.Models\Monoling0.CourseService.Application.Models.csproj" />
+    </ItemGroup>
+
 </Project>

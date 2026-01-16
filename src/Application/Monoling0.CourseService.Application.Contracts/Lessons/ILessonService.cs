@@ -11,7 +11,7 @@ public interface ILessonService
     Task DeleteLessonAsync(DeleteLesson.Request request, CancellationToken cancellationToken);
 
     // Task SwapLessons(SwapLessons.Request request, CancellationToken cancellationToken);
-    Task<GetLesson.Response> GetLessonListAsync(GetLesson.Request request, CancellationToken cancellationToken);
+    Task<GetLessons.Response> GetLessonListAsync(GetLessons.Request request, CancellationToken cancellationToken);
 
     Task<GetLessonExperience.Response> GetLessonExperienceAsync(GetLessonExperience.Request request, CancellationToken cancellationToken);
 }
